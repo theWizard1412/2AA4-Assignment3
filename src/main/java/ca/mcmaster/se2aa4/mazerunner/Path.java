@@ -13,4 +13,9 @@ public class Path {
     public List<String> getMovements() {
         return movements;
     }
+
+    public boolean validatePath() {
+        
+        return false;
+    }
 }

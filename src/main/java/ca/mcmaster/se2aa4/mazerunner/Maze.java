@@ -43,7 +43,7 @@ public class Maze {
     public char getCell(int x, int y) {
 
       if ((x >= 0) && (x < width) && (y >= 0) && (y < height)) {
-        return layout[x][y];
+        return layout[y][x];
       }
         
         return '\0'; 
@@ -61,22 +61,31 @@ public class Maze {
     }
 
     public boolean isWall(int x, int y) {
-        
-        return false;
+
+      return getCell(x, y) == '#';
     }
 
     public boolean isPassage(int x, int y) {
-        
-        return false;
+      
+      return getCell(x, y) == ' ';
     }
 
     public int getStart() {
-        //add start postion
+        for (int i = 0; i < height; i++) {
+          if(layout[i][0] == ' ') {
+            return i;
+          }
+        }
         return -1;
     }
 
     public int getEnd() {
         //add end postion
+        for (int i = 0; i < height; i++) {
+          if(layout[i][width-1] == ' ') {
+            return i;
+          }
+        }
         return -1;
     }
 }

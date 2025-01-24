@@ -11,7 +11,6 @@ public class Main {
     public static void main(String[] args) {
         logger.info("** Starting Maze Runner");
 
-        
         Options options = new Options();
         options.addOption("i", "input", true, "Maze file");
 
@@ -38,7 +37,12 @@ public class Main {
             logger.info("Maze loaded successfully:");
             for (int y = 0; y < maze.getHeight(); y++) {
                 for (int x = 0; x < maze.getWidth(); x++) {
-                    System.out.print(maze.getCell(x-1, y-1));
+                    if (maze.getCell(x, y) == '#') {
+                        System.out.print("WALL" + " ");
+                    }
+                    else {
+                        System.out.print("PASS" + " ");
+                    }
                 }
                 System.out.println();
             }
