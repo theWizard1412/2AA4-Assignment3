@@ -12,7 +12,7 @@ public class Explorer {
     }
 
     public void explore() {
-        logger.info("Exploration started");
+        logger.info("Computing Path");
 
         int x_position = 0;
         int y_position = maze.getStart();
@@ -43,6 +43,6 @@ public class Explorer {
         }
         System.out.println();
 
-        logger.info("Exploration completed");
+        logger.info("End of MazeRunner");
     }
 }

@@ -19,7 +19,7 @@ public class Main {
         try {
             CommandLine cmd = parser.parse(options, args);
 
-            // Check if the -i flag is provided
+            // check if no -i flag
             if (!cmd.hasOption("i")) {
                 logger.error("No input file specified. Use -i <filename>.");
                 System.out.println("Usage: java -jar maze-runner.jar -i <maze-file>");
@@ -27,14 +27,14 @@ public class Main {
             }
 
             String inputFile = cmd.getOptionValue("i");
-            logger.info("Reading the maze from file: {}", inputFile);
+            logger.info("*** Reading the maze from file: {}", inputFile);
 
-            // Load the maze using the Maze class
+            // load maze
             Maze maze = new Maze();
             maze.loadFromFile(inputFile);
 
             
-            logger.info("Maze loaded successfully:");
+            logger.info("*** Maze loaded successfully:");
             for (int y = 0; y < maze.getHeight(); y++) {
                 for (int x = 0; x < maze.getWidth(); x++) {
                     if (maze.getCell(x, y) == '#') {
