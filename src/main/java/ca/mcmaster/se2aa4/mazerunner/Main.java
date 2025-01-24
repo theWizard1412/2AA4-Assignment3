@@ -38,7 +38,7 @@ public class Main {
             logger.info("Maze loaded successfully:");
             for (int y = 0; y < maze.getHeight(); y++) {
                 for (int x = 0; x < maze.getWidth(); x++) {
-                    System.out.print(maze.getCell(x, y));
+                    System.out.print(maze.getCell(x-1, y-1));
                 }
                 System.out.println();
             }
