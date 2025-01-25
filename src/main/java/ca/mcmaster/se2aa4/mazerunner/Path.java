@@ -15,7 +15,8 @@ public class Path {
     }
 
     public boolean validatePath() {
-        
+        // check if path is valide
+        //note that maze is non-directional, beginign and end point may exchange
         return false;
     }
 }
