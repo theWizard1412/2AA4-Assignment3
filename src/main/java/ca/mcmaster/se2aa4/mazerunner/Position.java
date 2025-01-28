@@ -29,10 +29,29 @@ public class Position {
   }
 
   public int getY() {
-      return y;
+    return y;
   }
 
   public void setY(int y) {
-      this.y = y;
+    this.y = y;
+  }
+
+  public void move(int dx, int dy) {
+    x += dx;
+    y += dy;
+  }
+
+  public boolean equals(Position position) {
+    if (this == position) {
+      return true;
+    }
+
+    if ((position.getX() == x) && (position.getY() == y)) {
+      return true;
+    }
+
+    else {
+      return false;
+    }
   }
 }
