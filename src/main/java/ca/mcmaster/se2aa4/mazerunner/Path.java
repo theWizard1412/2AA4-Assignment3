@@ -32,7 +32,7 @@ public class Path {
 
     private boolean moveStep(char step) {
         if (step == 'F') {
-            
+
         }
         else if (step == 'L') {
 
@@ -40,5 +40,6 @@ public class Path {
         else{
 
         }
+        return false;
     }
 }
