@@ -13,6 +13,7 @@ public class Main {
 
         Options options = new Options();
         options.addOption("i", "input", true, "Maze file");
+        options.addOption("p", "path", true, "Path String");
 
         CommandLineParser parser = new DefaultParser();
 
@@ -34,6 +35,12 @@ public class Main {
             maze.loadFromFile(inputFile);
 
             
+            if (cmd.hasOption("p")) {
+                String pathString = cmd.getOptionValue("p");
+                System.out.println("Parameter value: " + pathString);
+            }
+            
+
             logger.info("*** Maze loaded successfully:");
             for (int y = 0; y < maze.getHeight(); y++) {
                 for (int x = 0; x < maze.getWidth(); x++) {
