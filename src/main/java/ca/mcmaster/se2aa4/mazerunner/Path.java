@@ -5,6 +5,13 @@ import java.util.List;
 
 public class Path {
     private String inputPath;
+    private Position position;
+    private Maze maze;
+
+    public Path(Maze maze) {
+        this.maze = maze;
+        this.position = new Position(maze.getStart());
+    }
 
     public void addMovement(String inputPath) {
         this.inputPath = inputPath;
@@ -32,13 +39,13 @@ public class Path {
 
     private boolean moveStep(char step) {
         if (step == 'F') {
-
+            position.move();
         }
-        else if (step == 'L') {
-
+        else if (step == ' ') {
+            //skip
         }
         else{
-
+            position.turn(step);
         }
         return false;
     }

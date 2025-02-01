@@ -12,7 +12,7 @@ public class Position {
     direction = 'N';
   }
 
-  public Position() {
+  public Position() { //fix later
     this.x = 0;
     this.y = 0;
   }
@@ -39,14 +39,14 @@ public class Position {
   }
 
   public void move() {
-    if (direction == 'N') {
-      y++;
+    if (direction == 'N') { //note if we go north we are subtracting because y is 0 on top
+      y--;
     }
     else if (direction == 'E') {
       x++;
     }
     else if (direction == 'S') {
-      y--;
+      y++;
     }
     else {
       x--;
