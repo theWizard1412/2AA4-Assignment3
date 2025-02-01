@@ -4,10 +4,12 @@ public class Position {
   
   private int x;
   private int y;
+  private char direction;
 
   public Position(int x, int y) {
     this.x = x;
     this.y = y;
+    direction = 'N';
   }
 
   public Position() {
@@ -36,9 +38,55 @@ public class Position {
     this.y = y;
   }
 
-  public void move(int dx, int dy) {
-    x += dx;
-    y += dy;
+  public void move() {
+    if (direction == 'N') {
+      y++;
+    }
+    else if (direction == 'E') {
+      x++;
+    }
+    else if (direction == 'S') {
+      y--;
+    }
+    else {
+      x--;
+    }
+  }
+
+  public void turn(char turning) {
+    if (direction == 'N') {
+      if (turning == 'L') {
+        direction = 'W';
+      }
+      else {
+        direction = 'E';
+      }
+    }
+    else if (direction == 'E') {
+      if (turning == 'L') {
+        direction = 'N';
+      }
+      else {
+        direction = 'S';
+      }
+    }
+
+    else if (direction == 'S') {
+      if (turning == 'L') {
+        direction = 'E';
+      }
+      else {
+        direction = 'W';
+      }
+    }
+    else {
+      if (turning == 'L') {
+        direction = 'S';
+      }
+      else {
+        direction = 'N';
+      }
+    }
   }
 
   public boolean equals(Position position) {
