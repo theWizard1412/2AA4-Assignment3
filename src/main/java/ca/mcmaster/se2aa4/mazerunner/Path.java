@@ -5,12 +5,12 @@ import java.util.List;
 
 public class Path {
     private String inputPath;
-    private Position position;
     private Maze maze;
+    private Position position;
 
-    public Path(Maze maze) {
+    public Path(Maze maze, Position position) {
         this.maze = maze;
-        this.position = new Position(maze.getStart());
+        this.position = position;
     }
 
     public void addMovement(String inputPath) {
@@ -40,13 +40,14 @@ public class Path {
                 }
             }
         }
-        if (position.getX() == maze.getWidth()-1) {
+        if ((position.getX() == maze.getWidth()-1) || (position.getX() == 0)){
             return true;
         }
 
         return false;
     }
 
+    
     private void moveStep(char step) {
         if (step == 'F') {
             position.move();

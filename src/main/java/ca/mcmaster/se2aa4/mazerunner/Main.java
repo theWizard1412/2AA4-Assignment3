@@ -53,11 +53,20 @@ public class Main {
 
             if (cmd.hasOption("p")) {
                 String pathString = cmd.getOptionValue("p");
-                Path path = new Path(maze);
-                path.addMovement(pathString);
-                boolean pathCheck = path.validatePath();
 
-                if (pathCheck) {
+                Position start_position = new Position(maze.getStart());
+                Position end_position = new Position(maze.getWidth()-1, maze.getEnd());
+
+                Path path_forward = new Path(maze, start_position);
+                path_forward.addMovement(pathString);
+
+                Path path_backward = new Path(maze, end_position);
+                path_backward.addMovement(pathString);
+
+                boolean check_forward = path_forward.validatePath();
+                boolean check_bacbward = path_backward.validatePath();
+
+                if (check_forward || check_bacbward) {
                     System.out.println("correct path");
                 }
                 else {
