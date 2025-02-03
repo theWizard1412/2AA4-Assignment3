@@ -28,16 +28,26 @@ public class Path {
                 i++;
                 for (int j = 0; j < num; j++) {
                     moveStep(movement[i]);
+                    if (maze.isWall(position.getX(), position.getY())){
+                        return false;
+                    }
                 }
             }
             else {
                 moveStep(movement[i]);
+                if (maze.isWall(position.getX(), position.getY())){
+                    return false;
+                }
             }
         }
+        if (position.getX() == maze.getWidth()-1) {
+            return true;
+        }
+
         return false;
     }
 
-    private boolean moveStep(char step) {
+    private void moveStep(char step) {
         if (step == 'F') {
             position.move();
         }
@@ -47,6 +57,5 @@ public class Path {
         else{
             position.turn(step);
         }
-        return false;
     }
 }

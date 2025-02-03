@@ -33,12 +33,6 @@ public class Main {
             // load maze
             Maze maze = new Maze();
             maze.loadFromFile(inputFile);
-
-            
-            if (cmd.hasOption("p")) {
-                String pathString = cmd.getOptionValue("p");
-                System.out.println("Parameter value: " + pathString);
-            }
             
 
             logger.info("*** Maze loaded successfully:");
@@ -54,9 +48,25 @@ public class Main {
                 System.out.println();
             }
 
+            if (cmd.hasOption("p")) {
+                String pathString = cmd.getOptionValue("p");
+                Path path = new Path(maze);
+                path.addMovement(pathString);
+                boolean pathCheck = path.validatePath();
+
+                if (pathCheck) {
+                    System.out.println("correct path");
+                }
+                else {
+                    System.out.println("incorrect path");
+                }
+            }
+
+            else {
             
-            Explorer explorer = new Explorer(maze);
-            explorer.explore();
+                Explorer explorer = new Explorer(maze);
+                explorer.explore();
+            }
 
         } catch (ParseException e) {
             logger.error("Failed to parse command-line arguments.", e);
