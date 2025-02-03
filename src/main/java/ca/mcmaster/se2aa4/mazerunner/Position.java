@@ -9,17 +9,19 @@ public class Position {
   public Position(int x, int y) {
     this.x = x;
     this.y = y;
-    direction = 'N';
+    direction = 'E';
   }
 
   public Position() { //fix later
     this.x = 0;
     this.y = 0;
+    direction = 'E';
   }
 
   public Position(int y) {
     this.x = 0;
     this.y = y;
+    direction = 'E';
   }
 
   public int getX() {
@@ -36,6 +38,10 @@ public class Position {
 
   public void setY(int y) {
     this.y = y;
+  }
+
+  public char getDirection() {
+    return direction;
   }
 
   public void move() {
