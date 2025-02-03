@@ -36,6 +36,8 @@ public class Main {
             
 
             logger.info("*** Maze loaded successfully:");
+            
+            /* 
             for (int y = 0; y < maze.getHeight(); y++) {
                 for (int x = 0; x < maze.getWidth(); x++) {
                     if (maze.getCell(x, y) == '#') {
@@ -47,6 +49,7 @@ public class Main {
                 }
                 System.out.println();
             }
+            */
 
             if (cmd.hasOption("p")) {
                 String pathString = cmd.getOptionValue("p");
