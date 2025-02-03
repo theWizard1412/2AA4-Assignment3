@@ -53,35 +53,54 @@ public class Explorer {
     }
     
     public void rightHandAlgorithm() {
-        while (position.getX() < maze.getWidth()-1) {
+        StringBuilder path = new StringBuilder();
     
-            if (rightIsWall()) { //if right is wall, meaning right hand is currently on the wall
+        while (position.getX() < maze.getWidth() - 1) {
+            if (rightIsWall()) {
                 if (canMoveForward(position)) {
                     position.move();
-                    System.out.print('F');
+                    path.append('F');
+                } else {
+                    position.turn('L');
+                    path.append('L');
                 }
-                else {
-                    position.turn('L'); //turn left because right is wall
-                    System.out.print('L');
-                }
-            }
-
-            else {
+            } else {
                 position.turn('R');
-                System.out.print('R');
-
+                path.append('R');
+    
                 if (canMoveForward(position)) {
                     position.move();
-                    System.out.print('F');
+                    path.append('F');
                 }
-                
             }
         }
     
-        System.out.println(); // Move to a new line after printing the path
+        System.out.println(factorizePath(path.toString()));
     }
     
+    private String factorizePath(String path) {
+        StringBuilder factorized = new StringBuilder();
+        int count = 1;
     
+        for (int i = 1; i < path.length(); i++) {
+            if (path.charAt(i) == path.charAt(i - 1)) {
+                count++;
+            } else {
+                if (count > 1) {
+                    factorized.append(count);
+                }
+                factorized.append(path.charAt(i - 1)).append(" ");
+                count = 1;
+            }
+        }
+    
+        if (count > 1) {
+            factorized.append(count);
+        }
+        factorized.append(path.charAt(path.length() - 1));
+    
+        return factorized.toString().trim();
+    }
     
     private boolean rightIsWall() {
         int x = position.getX();
