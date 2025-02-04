@@ -23,30 +23,6 @@ public class Explorer {
             return;
         }
 
-       /*  while ((x_position >=0 ) && (x_position < maze.getWidth()) && (y_position >= 0) && (y_position < maze.getHeight())) {
-
-            if (x_position + 1 >= maze.getWidth()) {
-                break;
-            }
-
-            x_position++;
-            F_count++;
-
-            if(maze.isWall(x_position, y_position)) {
-                logger.info("Path not find");
-                return;
-            } 
-        }
-            */
-
-            /* 
-        for (int i = 0; i < F_count; i++) {
-            System.out.print("F");
-        }
-        System.out.println();
-
-        */
-
         rightHandAlgorithm();
         
         logger.info("End of MazeRunner");

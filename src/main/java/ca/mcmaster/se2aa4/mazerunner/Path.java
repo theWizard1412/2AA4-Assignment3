@@ -23,6 +23,9 @@ public class Path {
         char[] movement = inputPath.toCharArray();
 
         for (int i = 0; i < movement.length; i++) {
+            if (movement[i] == ' ') {
+                continue; // Skip spaces
+            }
             if (Character.isDigit(movement[i])) {
                 int num = movement[i] - '0'; //cast char to int
                 i++;
@@ -40,6 +43,7 @@ public class Path {
                 }
             }
         }
+        
         if ((position.getX() == maze.getWidth()-1) || (position.getX() == 0)){
             return true;
         }

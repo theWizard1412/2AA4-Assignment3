@@ -9,13 +9,7 @@ public class Position {
   public Position(int x, int y) {
     this.x = x;
     this.y = y;
-    direction = 'E';
-  }
-
-  public Position() { //fix later
-    this.x = 0;
-    this.y = 0;
-    direction = 'E';
+    direction = 'W';
   }
 
   public Position(int y) {
