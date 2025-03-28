@@ -14,6 +14,51 @@ public class Path {
         this.inputPath = inputPath;
     }
 
+    
+    public boolean validatePath() {
+        char[] movement = inputPath.toCharArray();
+        int i = 0;
+    
+        while (i < movement.length) {
+            if (movement[i] == ' ') {
+                i++; // Skip spaces
+                continue;
+            }
+    
+            int num = 1; // Default movement count (for cases like "F" without a number)
+    
+            if (Character.isDigit(movement[i])) {
+                StringBuilder numBuilder = new StringBuilder();
+    
+                // Extract the full number (e.g., "14F" → "14")
+                while (i < movement.length && Character.isDigit(movement[i])) {
+                    numBuilder.append(movement[i]);
+                    i++;
+                }
+    
+                num = Integer.parseInt(numBuilder.toString()); // Convert to integer
+            }
+    
+            // Ensure there is a movement character after the number
+            if (i < movement.length && (movement[i] == 'F' || movement[i] == 'L' || movement[i] == 'R')) {
+                char direction = movement[i];
+    
+                for (int j = 0; j < num; j++) {
+                    moveStep(direction);
+                    if (maze.isWall(position.getX(), position.getY())) {
+                        return false;
+                    }
+                }
+            }
+    
+            i++; // Move to the next character
+        }
+    
+        return (position.getX() == maze.getWidth() - 1) || (position.getX() == 0);
+    }
+    
+    
+    /* 
     public boolean validatePath() {
         // check if path is valide
         //note that maze is non-directional, beginign and end point may exchange
@@ -47,7 +92,7 @@ public class Path {
 
         return false;
     }
-
+ */
     
     private void moveStep(char step) {
         if (step == 'F') {
@@ -60,4 +105,6 @@ public class Path {
             position.turn(step);
         }
     }
+
+    
 }
