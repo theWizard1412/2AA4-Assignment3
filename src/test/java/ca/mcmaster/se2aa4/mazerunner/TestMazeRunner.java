@@ -28,5 +28,12 @@ public class TestMazeRunner {
     assertEquals(5, end);  
   }
 
+  @Test
+  public void testGetCell() {
+    //test getCell(int x, int y) which returns the cell at that position
+    char cell = this.maze.getCell(0, 0);
+
+    assertEquals(cell, '#');
+  }
 
 }
