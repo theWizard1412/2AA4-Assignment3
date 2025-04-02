@@ -9,7 +9,7 @@
 
   <groupId>io.github.ace-lectures.2aa4</groupId>
   <!-- Replace this with your MacId. E.g., mine would be a1-mossers -->
-  <artifactId>a1-liu2007</artifactId>
+  <artifactId>a1-daid7</artifactId>
   <version>1.0</version>
   <name>McMaster :: SFWRENG :: 2AA4 :: Maze Runner</name>
 
@@ -36,10 +36,19 @@
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-core</artifactId>
     </dependency>
+    <!-- Unit testing with jUnit 5-->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.10.1</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
     <finalName>mazerunner</finalName>
+    <sourceDirectory>src/main/java</sourceDirectory>
+    <testSourceDirectory>src/tests/java</testSourceDirectory>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
