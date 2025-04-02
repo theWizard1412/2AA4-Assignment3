@@ -36,4 +36,11 @@ public class TestMazeRunner {
     assertEquals(cell, '#');
   }
 
+  @Test
+  public void testGetWidth() {
+    // test if getWidth() returns proper width of the maze
+    int width = this.maze.getWidth();
+
+    assertEquals(width, 11);
+  }
 }
