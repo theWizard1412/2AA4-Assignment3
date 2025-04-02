@@ -44,12 +44,27 @@ public class TestMazeRunner {
     assertEquals(width, 11);
   }
 
-  @Test void testGetHeight() {
+  @Test 
+  public void testGetHeight() {
     // test if getHeight returns proper height of the maze
     int height = this.maze.getHeight();
 
     assertEquals(height, 11);
   }
 
+  @Test
+  public void testIsWall() {
+
+    boolean wall = this.maze.isWall(0,0);
+
+    assertEquals(wall, true);
+  }
+
+  @Test
+  public void testIsPassage() {
+
+    boolean passage = this.maze.isPassage(0, 0);
+    assertEquals(passage, false);
+  }
   
 }
