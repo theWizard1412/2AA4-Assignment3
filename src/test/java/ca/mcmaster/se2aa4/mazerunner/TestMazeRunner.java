@@ -19,14 +19,24 @@ public class TestMazeRunner {
   }
 
   @Test
-  public void testfindEntryExitRows() {
-        // use the maze object to check entry and exit points
+  public void testGetStart() {
+        // use the maze object to check starting y location
     int start = this.maze.getStart();
-    int end = this.maze.getEnd();
+    
         
     assertEquals(8, start); 
-    assertEquals(5, end);  
+    
   }
+
+  @Test
+  public void testGetEnd() {
+    //test get end y location
+    int end = this.maze.getEnd();
+
+    assertEquals(5, end);  
+
+  }
+
 
   @Test
   public void testGetCell() {
@@ -97,7 +107,6 @@ public class TestMazeRunner {
     assertEquals(true, validate);
   }
      
-  
 
 
 }
