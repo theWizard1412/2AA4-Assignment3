@@ -7,8 +7,7 @@ public class TestCommandsAndPathValidation {
 
     @Test
     public void testMoveCommandFacingEast() {
-        ObservablePosition pos = new ObservablePosition(3); // starts at (0, 3), facing East
-        pos.addObserver(new LoggingObserver()); // Optional: for output
+        Position pos = new Position(3); // starts at (0, 3), facing East
         Command move = new MoveCommand(pos);
         move.execute();
         assertEquals(1, pos.getX());
@@ -17,8 +16,7 @@ public class TestCommandsAndPathValidation {
 
     @Test
     public void testTurnCommandLeftFromEast() {
-        ObservablePosition pos = new ObservablePosition(3); // facing East
-        pos.addObserver(new LoggingObserver());
+        Position pos = new Position(3); // facing East
         Command turn = new TurnCommand(pos, 'L');
         turn.execute();
         assertEquals('N', pos.getDirection());
@@ -26,8 +24,7 @@ public class TestCommandsAndPathValidation {
 
     @Test
     public void testTurnCommandRightFromEast() {
-        ObservablePosition pos = new ObservablePosition(3); // facing East
-        pos.addObserver(new LoggingObserver());
+        Position pos = new Position(3); // facing East
         Command turn = new TurnCommand(pos, 'R');
         turn.execute();
         assertEquals('S', pos.getDirection());
@@ -37,13 +34,13 @@ public class TestCommandsAndPathValidation {
     public void testInvalidPathHitsWall() {
         Maze maze = new Maze();
         maze.loadFromFile("./examples/small.maz.txt");
-        ObservablePosition pos = new ObservablePosition(maze.getStart());
-        pos.addObserver(new LoggingObserver());
+        Position pos = new Position(maze.getStart()); // uses (0, y), facing East
         Path path = new Path(maze, pos);
 
-        path.addMovement("F F F F F F F F F"); // Should hit a wall eventually
+        path.addMovement("F F F F F F F F F"); // Assumes crash into wall
         boolean result = path.validatePath();
 
         assertEquals(false, result);
     }
+
 }
