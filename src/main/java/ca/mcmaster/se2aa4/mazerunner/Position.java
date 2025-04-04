@@ -6,7 +6,7 @@ public class Position {
   private int y;
   private char direction;
 
-  public Position(int x, int y) {
+  public Position(int x, int y) { //facing west for reverse
     this.x = x;
     this.y = y;
     direction = 'W';
