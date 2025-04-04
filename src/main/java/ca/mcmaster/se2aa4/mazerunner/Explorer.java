@@ -31,6 +31,7 @@ public class Explorer {
         logger.info("End of MazeRunner");
     }
     
+    // Right hand algorithm now uses command pattern
     public void rightHandAlgorithm() {
     StringBuilder path = new StringBuilder();
     List<Command> commands = new ArrayList<>(); // List to hold commands
