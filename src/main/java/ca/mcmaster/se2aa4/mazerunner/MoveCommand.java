@@ -12,4 +12,9 @@ public void execute() {
     position.move();
 }
 
+@Override
+public Position getTargetPosition() {
+    return position;
+}
+
 }

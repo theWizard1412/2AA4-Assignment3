@@ -7,12 +7,16 @@ public class TurnCommand implements Command {
   public TurnCommand(Position position, char turnDirection) {
     this.position = position;
     this.turnDirection = turnDirection;
-}
+  }
 
-@Override
-public void execute() {
+  @Override
+  public void execute() {
     position.turn(turnDirection);
-}
+  }
 
+  @Override
+  public Position getTargetPosition() {
+    return position;
+  }
 
 }

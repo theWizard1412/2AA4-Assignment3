@@ -15,6 +15,8 @@ public class Explorer {
         this.position = new Position(maze.getStart());
         this.end = new Position(maze.getEnd());
         this.invoker = new CommandInvoker();
+        // Attach a console observer to print command execution details
+        invoker.addObserver(new SilentCommandObserver());
     }
     
     public void explore() {
