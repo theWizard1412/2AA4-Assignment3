@@ -1,8 +1,5 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,63 +8,53 @@ public class Explorer {
     private Maze maze;
     private Position position;
     private Position end;
+    private CommandInvoker invoker;
 
     public Explorer(Maze maze) {
         this.maze = maze;
         this.position = new Position(maze.getStart());
         this.end = new Position(maze.getEnd());
+        this.invoker = new CommandInvoker();
     }
-
+    
     public void explore() {
         logger.info("Computing Path");
-
+    
         if (position.getY() == -1) {
             System.out.println("Start Position not found");
             return;
         }
-
+    
         rightHandAlgorithm();
         
         logger.info("End of MazeRunner");
     }
     
-    // Right hand algorithm now uses command pattern
     public void rightHandAlgorithm() {
-    StringBuilder path = new StringBuilder();
-    List<Command> commands = new ArrayList<>(); // List to hold commands
-
-    while (position.getX() < maze.getWidth() - 1) {
-        if (rightIsWall()) {
-            if (canMoveForward(position)) {
-                Command moveCommand = new MoveCommand(position);
-                commands.add(moveCommand); // Add the move command to the list
-                path.append('F');
+        StringBuilder path = new StringBuilder();
+    
+        while (position.getX() < maze.getWidth() - 1) {
+            if (rightIsWall()) {
+                if (canMoveForward(position)) {
+                    invoker.execute(new MoveCommand(position));
+                    path.append('F');
+                } else {
+                    invoker.execute(new TurnCommand(position, 'L'));
+                    path.append('L');
+                }
             } else {
-                Command turnLeftCommand = new TurnCommand(position, 'L');
-                commands.add(turnLeftCommand); // Add the turn command to the list
-                path.append('L');
-            }
-        } else {
-            Command turnRightCommand = new TurnCommand(position, 'R');
-            commands.add(turnRightCommand); // Add the turn command to the list
-            path.append('R');
-
-            if (canMoveForward(position)) {
-                Command moveCommand = new MoveCommand(position);
-                commands.add(moveCommand); // Add the move command to the list
-                path.append('F');
+                invoker.execute(new TurnCommand(position, 'R'));
+                path.append('R');
+    
+                if (canMoveForward(position)) {
+                    invoker.execute(new MoveCommand(position));
+                    path.append('F');
+                }
             }
         }
+    
+        System.out.println(factorizePath(path.toString()));
     }
-
-    // Execute all commands after accumulating them
-    for (Command command : commands) {
-        command.execute();  // Executes each command
-    }
-
-    System.out.println(factorizePath(path.toString()));
-}
-
     
     private String factorizePath(String path) {
         StringBuilder factorized = new StringBuilder();
@@ -96,77 +83,35 @@ public class Explorer {
     private boolean rightIsWall() {
         int x = position.getX();
         int y = position.getY();
-
+    
         switch (position.getDirection()) {
             case 'N':
-                return maze.isWall(x + 1, y);  // Can move right (east)
+                return maze.isWall(x + 1, y);  // Right of North is East
             case 'E':
-                return maze.isWall(x, y + 1);  // Can move right (south)
+                return maze.isWall(x, y + 1);  // Right of East is South
             case 'S':
-                return maze.isWall(x - 1, y);  // Can move right (west)
+                return maze.isWall(x - 1, y);  // Right of South is West
             case 'W':
-                return maze.isWall(x, y - 1);  // Can move right (north)
+                return maze.isWall(x, y - 1);  // Right of West is North
             default:
                 return false;
         }
     }
-    
-    
-    
-    private boolean canMoveRight() {
-        // Determine if we can turn right
-        int x = position.getX();
-        int y = position.getY();
-        switch (position.getDirection()) {
-            case 'N':
-                return maze.isPassage(x + 1, y);  // Can move right (east)
-            case 'E':
-                return maze.isPassage(x, y + 1);  // Can move right (south)
-            case 'S':
-                return maze.isPassage(x - 1, y);  // Can move right (west)
-            case 'W':
-                return maze.isPassage(x, y - 1);  // Can move right (north)
-            default:
-                return false;
-        }
-    }
-    
-    private boolean canMoveLeft() {
-        // Determine if we can turn left
-        int x = position.getX();
-        int y = position.getY();
-        switch (position.getDirection()) {
-            case 'N':
-                return maze.isPassage(x - 1, y);  // Can move left (west)
-            case 'E':
-                return maze.isPassage(x, y - 1);  // Can move left (north)
-            case 'S':
-                return maze.isPassage(x + 1, y);  // Can move left (east)
-            case 'W':
-                return maze.isPassage(x, y + 1);  // Can move left (south)
-            default:
-                return false;
-        }
-    }
-    
     
     private boolean canMoveForward(Position pos) {
         int x = pos.getX();
         int y = pos.getY();
         switch (pos.getDirection()) {
             case 'N':
-                return maze.isPassage(x, y - 1);  // Can move north
+                return maze.isPassage(x, y - 1);
             case 'E':
-                return maze.isPassage(x + 1, y);  // Can move east
+                return maze.isPassage(x + 1, y);
             case 'S':
-                return maze.isPassage(x, y + 1);  // Can move south
+                return maze.isPassage(x, y + 1);
             case 'W':
-                return maze.isPassage(x - 1, y);  // Can move west
+                return maze.isPassage(x - 1, y);
             default:
                 return false;
         }
-    }    
-    
-
-    
-}
+    }
+}    
