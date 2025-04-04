@@ -1,5 +1,8 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,30 +32,41 @@ public class Explorer {
     }
     
     public void rightHandAlgorithm() {
-        StringBuilder path = new StringBuilder();
-    
-        while (position.getX() < maze.getWidth() - 1) {
-            if (rightIsWall()) {
-                if (canMoveForward(position)) {
-                    position.move();
-                    path.append('F');
-                } else {
-                    position.turn('L');
-                    path.append('L');
-                }
+    StringBuilder path = new StringBuilder();
+    List<Command> commands = new ArrayList<>(); // List to hold commands
+
+    while (position.getX() < maze.getWidth() - 1) {
+        if (rightIsWall()) {
+            if (canMoveForward(position)) {
+                Command moveCommand = new MoveCommand(position);
+                commands.add(moveCommand); // Add the move command to the list
+                path.append('F');
             } else {
-                position.turn('R');
-                path.append('R');
-    
-                if (canMoveForward(position)) {
-                    position.move();
-                    path.append('F');
-                }
+                Command turnLeftCommand = new TurnCommand(position, 'L');
+                commands.add(turnLeftCommand); // Add the turn command to the list
+                path.append('L');
+            }
+        } else {
+            Command turnRightCommand = new TurnCommand(position, 'R');
+            commands.add(turnRightCommand); // Add the turn command to the list
+            path.append('R');
+
+            if (canMoveForward(position)) {
+                Command moveCommand = new MoveCommand(position);
+                commands.add(moveCommand); // Add the move command to the list
+                path.append('F');
             }
         }
-    
-        System.out.println(factorizePath(path.toString()));
     }
+
+    // Execute all commands after accumulating them
+    for (Command command : commands) {
+        command.execute();  // Executes each command
+    }
+
+    System.out.println(factorizePath(path.toString()));
+}
+
     
     private String factorizePath(String path) {
         StringBuilder factorized = new StringBuilder();
