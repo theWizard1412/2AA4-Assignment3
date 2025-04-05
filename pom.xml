@@ -48,7 +48,7 @@
   <build>
     <finalName>mazerunner</finalName>
     <sourceDirectory>src/main/java</sourceDirectory>
-    <testSourceDirectory>src/test/java</testSourceDirectory>
+    <testSourceDirectory>src/tests/java</testSourceDirectory>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
